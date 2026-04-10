@@ -57,7 +57,7 @@ string descompresion(string res ){
 
 }
 
-void compresion_y_descompresion(){
+void compresion_y_descompresion_rle(){
     string c,res;
     cout <<"Ingrese una cadena de caracteres para la compresion: "<<endl;
     cin.ignore();

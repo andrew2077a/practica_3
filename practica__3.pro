@@ -4,7 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        librerias.cpp \
+        Encriptacion_y_desencriptacion.cpp \
+        LZ78.cpp \
+        RLE.cpp \
         main.cpp
 
 HEADERS += \
