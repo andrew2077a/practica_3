@@ -53,22 +53,32 @@ string descompresion(string res ){
     }
     return descompresion;
 
+}
 
+bool verificar (string c,string res){
+    if (c==res){
+        return true;
 
+    }
+    else{
+        return false;
+    }
 }
 
 void compresion_y_descompresion_rle(){
-    string c,res;
+    string c,res,rus;
     cout <<"Ingrese una cadena de caracteres para la compresion: "<<endl;
     cin.ignore();
     getline(cin, c);
     res=Run_Length_Encoding(c);
     cout<<"compresion: " << res<<endl;
-    res =descompresion(res);
-    cout<<"descompresion: " << res <<endl;
-    cout <<"verificacion de descomprecion exitosa"<<endl<<"_________________________________"<<endl;
+    rus =descompresion(res);
+    cout<<"descompresion: " << rus <<endl;
+    if (verificar(c,rus)){
+        cout <<"verificacion de descompresion"<<endl<<"_________________________________"<<endl<<"EXITOSA"<<endl;
+    }
     cout<<"original: "<< c<<endl;
-    cout<<"descompresion: "<<res<<endl;
+    cout<<"descompresion: "<<rus<<endl;
 
 
 }

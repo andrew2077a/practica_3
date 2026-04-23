@@ -14,6 +14,9 @@ int main(){
     case 2:
         compresion_y_descompresion_lz78();
         break;
+    case 3:
+        encriptacion_desencriptacion();
+        break;
     default:
         break;
     }

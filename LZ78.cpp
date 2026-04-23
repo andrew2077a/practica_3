@@ -26,18 +26,17 @@ void descompresion(int* prefijo, char* letra, int cont) {
 
     for (int i = 0; i < cont; i++) {
         char pala[50];
-        int posicion = 0;
+        int posicion = 0,p;
 
 
         pala[posicion++] = letra[i];
 
 
-        int p = prefijo[i];
+        p = prefijo[i];
         while (p != 0) {
             pala[posicion++] = letra[p - 1];
             p = prefijo[p - 1];
         }
-
 
         for (int j = posicion - 1; j >= 0; j--) {
             cout << pala[j];
@@ -51,7 +50,7 @@ void LZ78(char c[], int max){
     int *prefijo = new int[max];
     char *letra = new char[max];
     int cont = 0, preactual = 0;
-
+//(1, C)- pre y letra
     while (*p != '\0'){
         int resul = buscador(*p, prefijo, letra, cont, preactual);
 
@@ -92,11 +91,5 @@ void compresion_y_descompresion_lz78(){
     max =conunt(c);
     LZ78(c,max);
     cout<< "comparacion con el original: "<<c<<endl;
-    //cout<<"compresion: " << res<<endl;
-    // =descompresion(res);
-    //cout<<"descompresion: " << res <<endl;
-    //cout <<"verificacion de descomprecion exitosa"<<endl<<"_________________________________"<<endl;
-    //cout<<"original: "<< c<<endl;
-    //cout<<"descompresion: "<<res<<endl;
 
 }
