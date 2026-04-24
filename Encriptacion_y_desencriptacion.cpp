@@ -15,13 +15,8 @@ unsigned char operacionXOR(unsigned char byte, unsigned char K) {
 }
 
 
-void encriptacion_desencriptacion() {
-    char texto[50];
+void encriptacion_desencriptacion(char texto[]){
     int n, k_int;
-
-
-    cout << "Ingrese texto (una palabra): ";
-    cin >> texto;
 
     cout << "Ingrese n (rotacion 1-7): ";
     cin >> n;
@@ -47,7 +42,7 @@ void encriptacion_desencriptacion() {
     }
 
     cout << "Texto encriptado exitosamente: " << texto << endl;
-
+    guardar_en_archivo(texto);
 
     for (int i = 0; i < tam; i++) {
 
@@ -59,4 +54,5 @@ void encriptacion_desencriptacion() {
         texto[i] = (char)rotar_derecha(sin_xor, n);
     }
     cout << "Texto recuperado: " << texto << endl;
+    guardar_en_archivo(texto);
 }

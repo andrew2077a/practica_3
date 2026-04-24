@@ -7,7 +7,12 @@ SOURCES += \
         Encriptacion_y_desencriptacion.cpp \
         LZ78.cpp \
         RLE.cpp \
+        lector_archivo.cpp \
         main.cpp
 
 HEADERS += \
     librerias.h
+
+DISTFILES += \
+    mensaje.txt \
+    resultado.txt

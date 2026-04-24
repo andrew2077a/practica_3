@@ -3,6 +3,7 @@
 #include <string>
 using namespace std;
 string Run_Length_Encoding(string c ){
+    guardar_en_archivo(c);
     char *p=&c[0];
     char a;
     int cont=0;
@@ -27,6 +28,7 @@ string Run_Length_Encoding(string c ){
         }
 
     }
+    guardar_en_archivo(compresion);
     return compresion;
 
 }
@@ -51,6 +53,7 @@ string descompresion(string res ){
         p++;
 
     }
+    guardar_en_archivo(descompresion);
     return descompresion;
 
 }
@@ -64,14 +67,32 @@ bool verificar (string c,string res){
         return false;
     }
 }
+void cambiar_a_char(string texto, char tex[]){
+    size_t i=0;
+    while(i<texto.length()&&i<99){
+        tex[i]=texto[i];
+        i++;
+    }
+    tex[i]='\0';
+}
+void cambiar_a_string(string texto, char tex[]){
+    int i=0;
+    while(tex[i]!='\0'){
+        texto[i]=tex[i];
+        i++;
+    }
+    tex[i]='\0';
+}
 
 void compresion_y_descompresion_rle(){
+    char tex[100];
     string c,res,rus;
-    cout <<"Ingrese una cadena de caracteres para la compresion: "<<endl;
-    cin.ignore();
-    getline(cin, c);
+    c=  leer_archivo();
     res=Run_Length_Encoding(c);
     cout<<"compresion: " << res<<endl;
+    cambiar_a_char(res ,tex);
+    encriptacion_desencriptacion(tex);
+    cambiar_a_string(res,tex);
     rus =descompresion(res);
     cout<<"descompresion: " << rus <<endl;
     if (verificar(c,rus)){
@@ -79,6 +100,7 @@ void compresion_y_descompresion_rle(){
     }
     cout<<"original: "<< c<<endl;
     cout<<"descompresion: "<<rus<<endl;
+    guardar_en_archivo(res);
 
 
 }

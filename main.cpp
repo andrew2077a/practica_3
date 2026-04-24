@@ -5,7 +5,7 @@ using namespace std;
 
 int main(){
     int x;
-    cout << "Seleccione:" <<endl<<"1) RLE" <<endl <<"2) LZ78"<<endl<< "3) Encriptacion"<<endl;
+    cout << "Seleccione:" <<endl<<"1) RLE" <<endl <<"2) LZ78"<<endl<<endl;
     cin>>x;
     switch (x) {
     case 1:
@@ -13,9 +13,6 @@ int main(){
         break;
     case 2:
         compresion_y_descompresion_lz78();
-        break;
-    case 3:
-        encriptacion_desencriptacion();
         break;
     default:
         break;
