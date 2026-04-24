@@ -16,17 +16,30 @@ string Run_Length_Encoding(string c ){
         }
         else{
             p--;
-            compresion += to_string(cont)+*p;
-            p++;
-            cont =0;
-            a=*p;
+            if(*p>=48 && *p<=57){
+                compresion+=to_string(cont)+'#'+*p;
+                p++;
+                cont=0;
+                a=*p;
+            }
+            else{
+                compresion += to_string(cont)+*p;
+                p++;
+                cont =0;
+                a=*p;
+            }
         }
         if (*p =='\0'){
             p--;
-            compresion += to_string(cont)+*p;
-            p++;
+            if(*p>=48 && *p<=57){
+                compresion+=to_string(cont)+'#'+*p;
+                p++;
+            }
+            else{
+                compresion += to_string(cont)+*p;
+                p++;
+            }
         }
-
     }
     guardar_en_archivo(compresion);
     return compresion;
@@ -44,6 +57,9 @@ string descompresion(string res ){
             cont += *p;
         }
         else{
+            if(*p=='#'){
+                p++;
+            }
             for(int i=1;i<=stoi(cont);i++){
                 descompresion +=*p;
 
@@ -53,7 +69,6 @@ string descompresion(string res ){
         p++;
 
     }
-    guardar_en_archivo(descompresion);
     return descompresion;
 
 }
@@ -75,7 +90,7 @@ void cambiar_a_char(string texto, char tex[]){
     }
     tex[i]='\0';
 }
-void cambiar_a_string(string texto, char tex[]){
+void cambiar_a_string(string &texto, char tex[]){
     int i=0;
     while(tex[i]!='\0'){
         texto[i]=tex[i];
@@ -87,20 +102,19 @@ void cambiar_a_string(string texto, char tex[]){
 void compresion_y_descompresion_rle(){
     char tex[100];
     string c,res,rus;
-    c=  leer_archivo();
+    c=  leer_archivo(tex);
     res=Run_Length_Encoding(c);
     cout<<"compresion: " << res<<endl;
     cambiar_a_char(res ,tex);
     encriptacion_desencriptacion(tex);
     cambiar_a_string(res,tex);
     rus =descompresion(res);
-    cout<<"descompresion: " << rus <<endl;
     if (verificar(c,rus)){
         cout <<"verificacion de descompresion"<<endl<<"_________________________________"<<endl<<"EXITOSA"<<endl;
     }
     cout<<"original: "<< c<<endl;
     cout<<"descompresion: "<<rus<<endl;
-    guardar_en_archivo(res);
+    guardar_en_archivo(rus);
 
 
 }

@@ -5,7 +5,7 @@
 using namespace std;
 
 
-string leer_archivo() {
+string leer_archivo(char c[]) {
     ifstream archivo("C:\\Users\\gisel\\OneDrive\\Escritorio\\practi_c++\\fina\\practica__3\\mensaje.txt");
     string linea;
     string guardar;
@@ -20,6 +20,7 @@ string leer_archivo() {
             guardar += linea;
         }
         archivo.close();
+        cambiar_a_char(guardar,c);
         return guardar;
     }
     // Capturas el texto (char*) que lanzaste arriba

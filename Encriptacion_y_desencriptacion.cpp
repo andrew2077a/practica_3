@@ -54,5 +54,5 @@ void encriptacion_desencriptacion(char texto[]){
         texto[i] = (char)rotar_derecha(sin_xor, n);
     }
     cout << "Texto recuperado: " << texto << endl;
-    guardar_en_archivo(texto);
+
 }
