@@ -3,12 +3,25 @@
 
 using namespace std;
 
-// --- FLUJO DE DATOS ---
-// 1. LZ78 genera pares (prefijo, letra).
-// 2. Esos pares se guardan en el arreglo 'salida'.
-// 3. 'salida' entra a encriptación.
-// 4. 'salida' se recupera.
-// 5. Se descomprime usando los arreglos originales.
+
+void agregar_numero(char salida[], int& k, int num) {
+    if (num == 0) {
+        salida[k++] = '0';
+        return;
+    }
+
+    // Si el número es grande (ej: 11), lo descomponemos
+    char temporal[10];
+    int i = 0;
+    while (num > 0) {
+        temporal[i++] = (num % 10) + '0';
+        num /= 10;
+    }
+    // Metemos los dígitos al revés en la salida
+    while (i > 0) {
+        salida[k++] = temporal[--i];
+    }
+}
 
 int conunt(char c[]) {
     char *p = c;
@@ -47,7 +60,7 @@ void descompresion(int* prefijo, char* letra, int cont) {
     cout << endl;
 }
 
-void LZ78(char c[], int max, char salida[]) {
+void LZ78(char c[], int max, char comprimido[]) {
     char *p = c;
     int *prefijo = new int[max];
     char *letra = new char[max];
@@ -60,13 +73,10 @@ void LZ78(char c[], int max, char salida[]) {
         if (resul != 0) {
             preactual = resul;
         } else {
-            // Imprime como lo hacías antes
             cout << "(" << preactual << "," << *p << ")" << endl;
 
-            // ESTO ES "ENCRIPTAR LA COMPRESIÓN":
-            // Guardamos el par en 'salida' para que pase por XOR y Rotación
-            salida[k++] = (char)(preactual + '0');
-            salida[k++] = *p;
+            agregar_numero(comprimido, k, preactual);
+            comprimido[k++] = *p;
 
             prefijo[cont] = preactual;
             letra[cont] = *p;
@@ -78,21 +88,19 @@ void LZ78(char c[], int max, char salida[]) {
 
     if (preactual != 0) {
         cout << "(" << preactual << ", )" << endl;
-        salida[k++] = (char)(preactual + '0');
-        salida[k++] = '_';
+        comprimido[k++] = (char)(preactual + '0');
+        comprimido[k++] = '_';
         prefijo[cont] = preactual;
         letra[cont] = '\0';
         cont++;
     }
-    salida[k] = '\0'; // Final de la cadena comprimida
+    comprimido[k] = '\0';
 
-    // AQUÍ SE ENCRIPTA LA COMPRESIÓN
-    guardar_en_archivo(salida);
-    encriptacion_desencriptacion(salida);
+    guardar_en_archivo(comprimido);
+    encriptacion_desencriptacion(comprimido);
 
     // VERIFICACIÓN
     cout << "verificacion de descompresion" << endl;
-    cout << "_________________________________" << endl;
     cout << "EXITOSA" << endl;
     descompresion(prefijo, letra, cont);
 
@@ -102,7 +110,7 @@ void LZ78(char c[], int max, char salida[]) {
 
 void compresion_y_descompresion_lz78() {
     char c[100];
-    char comprimido[200]; // Donde se guardará la compresión para encriptar
+    char comprimido[100];
 
     leer_archivo(c);
     int max = conunt(c);
